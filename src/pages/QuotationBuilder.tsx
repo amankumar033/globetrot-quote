@@ -247,77 +247,79 @@ const QuotationBuilder = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/5">
       {/* Header */}
-      <header className="border-b bg-card shadow-sm">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex items-center space-x-4">
+      <header className="border-b border-border/30 bg-card/60 backdrop-blur-sm shadow-lg">
+        <div className="flex h-18 items-center justify-between px-8">
+          <div className="flex items-center space-x-6">
             <Link to="/">
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="rounded-xl">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Dashboard
               </Button>
             </Link>
-            <div className="h-6 w-px bg-border"></div>
-            <h1 className="text-xl font-bold text-foreground">Create New Quotation</h1>
+            <div className="h-8 w-px bg-border/50"></div>
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent">Create New Quotation</h1>
           </div>
-          <Button variant="outline">
+          <Button variant="outline" className="rounded-xl shadow-sm">
             <Save className="h-4 w-4 mr-2" />
             Save Draft
           </Button>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-8">
         {/* Progress Steps */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            {steps.map((step, index) => (
-              <div key={step.id} className="flex items-center">
-                <div className="flex items-center">
-                  <div
-                    className={cn(
-                      "h-10 w-10 rounded-full flex items-center justify-center text-sm font-medium",
-                      currentStep >= step.id
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
-                    )}
-                  >
-                    {step.id}
+        <div className="mb-12">
+          <div className="bg-card/40 backdrop-blur-sm rounded-2xl p-8 border border-border/30 shadow-lg">
+            <div className="flex items-center justify-between">
+              {steps.map((step, index) => (
+                <div key={step.id} className="flex items-center">
+                  <div className="flex items-center">
+                    <div
+                      className={cn(
+                        "h-12 w-12 rounded-2xl flex items-center justify-center text-sm font-semibold shadow-md transition-all duration-300",
+                        currentStep >= step.id
+                          ? "bg-gradient-to-br from-primary to-primary-hover text-primary-foreground shadow-primary/20"
+                          : "bg-muted/50 text-muted-foreground"
+                      )}
+                    >
+                      {step.id}
+                    </div>
+                    <div className="ml-4">
+                      <p className={cn(
+                        "text-base font-semibold transition-colors duration-300",
+                        currentStep >= step.id ? "text-foreground" : "text-muted-foreground"
+                      )}>
+                        {step.title}
+                      </p>
+                      <p className="text-sm text-muted-foreground">{step.description}</p>
+                    </div>
                   </div>
-                  <div className="ml-3">
-                    <p className={cn(
-                      "text-sm font-medium",
-                      currentStep >= step.id ? "text-foreground" : "text-muted-foreground"
-                    )}>
-                      {step.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground">{step.description}</p>
-                  </div>
+                  {index < steps.length - 1 && (
+                    <div className={cn(
+                      "h-px w-24 ml-8 transition-colors duration-300",
+                      currentStep > step.id ? "bg-gradient-to-r from-primary to-primary-hover" : "bg-muted/30"
+                    )}></div>
+                  )}
                 </div>
-                {index < steps.length - 1 && (
-                  <div className={cn(
-                    "h-px w-20 ml-6",
-                    currentStep > step.id ? "bg-primary" : "bg-muted"
-                  )}></div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Form Content */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              {currentStep === 1 && <Users className="h-5 w-5" />}
-              {currentStep === 2 && <MapPin className="h-5 w-5" />}
-              {currentStep === 3 && <Phone className="h-5 w-5" />}
-              {currentStep === 4 && <Mail className="h-5 w-5" />}
-              <span>{steps[currentStep - 1].title}</span>
+        <Card className="mb-12 border-0 shadow-xl bg-card/60 backdrop-blur-sm overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-primary/5 to-primary-hover/5 border-b border-border/30 pb-8">
+            <CardTitle className="flex items-center space-x-3 text-2xl font-semibold">
+              {currentStep === 1 && <Users className="h-6 w-6 text-primary" />}
+              {currentStep === 2 && <MapPin className="h-6 w-6 text-primary" />}
+              {currentStep === 3 && <Phone className="h-6 w-6 text-primary" />}
+              {currentStep === 4 && <Mail className="h-6 w-6 text-primary" />}
+              <span className="text-foreground">{steps[currentStep - 1].title}</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-10">
             {renderStepContent()}
           </CardContent>
         </Card>
@@ -328,6 +330,7 @@ const QuotationBuilder = () => {
             variant="outline"
             onClick={prevStep}
             disabled={currentStep === 1}
+            className="px-8 py-3 text-base rounded-xl shadow-md"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Previous
@@ -336,7 +339,7 @@ const QuotationBuilder = () => {
           <Button
             onClick={nextStep}
             disabled={currentStep === steps.length}
-            className="bg-gradient-primary"
+            className="bg-gradient-primary px-8 py-3 text-base rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             {currentStep === steps.length ? "Generate Quotation" : "Next"}
             <ArrowRight className="h-4 w-4 ml-2" />

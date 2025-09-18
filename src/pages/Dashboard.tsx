@@ -152,16 +152,16 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/5">
       {/* Header */}
-      <header className="border-b bg-card shadow-sm">
-        <div className="flex h-16 items-center justify-between px-6">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center">
-                <MapPin className="h-4 w-4 text-primary-foreground" />
+      <header className="border-b border-border/30 bg-card/60 backdrop-blur-sm shadow-lg">
+        <div className="flex h-18 items-center justify-between px-8">
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3">
+              <div className="h-10 w-10 rounded-2xl bg-gradient-primary flex items-center justify-center shadow-lg">
+                <MapPin className="h-5 w-5 text-primary-foreground" />
               </div>
-              <h1 className="text-xl font-bold text-foreground">TravelQuote Pro</h1>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent">TravelQuote Pro</h1>
             </div>
           </div>
 
@@ -172,7 +172,7 @@ const Dashboard = () => {
                 placeholder="Search quotations, clients..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-80 pl-10"
+                className="w-80 pl-10 rounded-xl bg-background/50 backdrop-blur-sm border-border/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
               />
             </div>
             
@@ -199,11 +199,11 @@ const Dashboard = () => {
 
       <div className="flex">
         {/* Main Content */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 p-8">
           {/* Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             {summaryCards.map((card, index) => (
-              <Card key={index} className="relative overflow-hidden">
+              <Card key={index} className="relative overflow-hidden border-0 shadow-lg bg-card/60 backdrop-blur-sm hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium text-muted-foreground">
                     {card.title}
